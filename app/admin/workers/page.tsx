@@ -1,8 +1,8 @@
-// → Manage all registered users
+// → Manage all registered workers
 import React from 'react'
 
 export default function page() {
   return (
-    <div>user page</div>
+    <div>worker page</div>
   )
 }
