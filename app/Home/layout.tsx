@@ -4,7 +4,7 @@ export default function HomeLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="auth-layout">
+    <div className="home-layout">
       {children}
     </div>
   );
