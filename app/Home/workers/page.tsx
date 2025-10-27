@@ -111,7 +111,7 @@ export default function page() {
                     <h3 className='font-semibold text-xl text-gray-900 mb-2 group-hover:text-blue-600 transition-colors'>{worker.name}</h3>
                     {worker.work_type && (
                       <p className='text-sm text-gray-600 mb-2'>
-                        <span className='font-medium'>Skills:</span> {worker.work_type}
+                        <span className='font-medium'>Skill:</span> {worker.work_type}
                       </p>
                     )}
                     {worker.experience && (

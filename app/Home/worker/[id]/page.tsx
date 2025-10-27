@@ -9,7 +9,7 @@ interface Worker {
   id: string | number;
   name: string;
   phone?: string;
-  skills?: string;
+  work_type?: string;
   experience?: string;
   city?: string;
   about?: string;
@@ -77,7 +77,7 @@ export default function WorkerDetailPage({ params }: PageProps) {
           <div className='text-center'>
             <h1 className='text-2xl font-bold text-gray-900 mb-4'>Worker Not Found</h1>
             <p className='text-gray-600 mb-8'>{error || 'The worker you are looking for does not exist.'}</p>
-            <Link 
+            <Link
               href="/Home/workers"
               className='bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors'
             >
@@ -94,7 +94,7 @@ export default function WorkerDetailPage({ params }: PageProps) {
       <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
         {/* Back Button */}
         <div className='mb-8'>
-          <Link 
+          <Link
             href="/Home/workers"
             className='inline-flex items-center text-blue-600 hover:text-blue-800 font-medium'
           >
@@ -107,8 +107,8 @@ export default function WorkerDetailPage({ params }: PageProps) {
           {/* Header */}
           <div className='bg-gradient-to-r from-blue-600 to-blue-800 px-6 py-8 text-white'>
             <h1 className='text-3xl font-bold mb-2'>{worker.name}</h1>
-            {worker.skills && (
-              <p className='text-blue-100 text-lg'>{worker.skills}</p>
+            {worker?.work_type && (
+              <p className='text-blue-100 text-lg'>{worker.work_type}</p>
             )}
           </div>
 
@@ -123,6 +123,12 @@ export default function WorkerDetailPage({ params }: PageProps) {
                     <div className='flex items-center'>
                       <span className='text-gray-600 pr-2'>Phone:</span>
                       <span className='text-gray-900'>{worker.phone}</span>
+                    </div>
+                  )}
+                   {worker.work_type && (
+                    <div className='flex items-center'>
+                      <span className='text-gray-600 pr-2'>Skill:</span>
+                      <span className='text-gray-900'>{worker.work_type}</span>
                     </div>
                   )}
                   {worker.city && (
