@@ -9,7 +9,7 @@ interface Worker {
   id: string | number;
   name: string;
   phone?: string;
-  skills?: string;
+  work_type?: string;
   experience?: string;
   city?: string;
   about?: string;
@@ -17,6 +17,7 @@ interface Worker {
   hourly_rate?: number;
   availability?: string;
   created_at?: string;
+  workerType?: string; 
 }
 
 export default function page() {
@@ -32,7 +33,7 @@ export default function page() {
       const supabase = createClient();
       try {
         const { data, error } = await supabase.from('workers').select('*')
-        console.log('workers :', data)
+        // console.log('workers :', data)
         if (error) {
           console.log('workers error :', error)
         } else {
@@ -49,9 +50,17 @@ export default function page() {
 
   // for filter workers list
   const filteredWorkers = workers.filter((worker: Worker) =>
-    worker.name.toLowerCase().includes(search.toLowerCase())
+    worker.work_type?.toLowerCase().includes(search.toLowerCase())
   );
 
+  // for search list 
+  const selectWorker = (workerType: any ) => {
+    console.log('select worker',workerType);
+    setSearch(workerType);
+    setIsOpen(false);
+  }
+
+  // loader
   if (loading) {
     return (
       <div className='flex justify-center items-center h-screen'>
@@ -69,54 +78,40 @@ export default function page() {
             <p className='text-gray-600'>Find skilled workers for your projects</p>
           </div>
           <div className='relative w-64'>
-            <div
+            <input
+              type="text"
+              placeholder="Search worker..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full p-2 border outline-none rounded"
               onClick={() => setIsOpen(!isOpen)}
-              className="border rounded-sm p-2 bg-white cursor-pointer"
-            >
-              {selectedWorker || "Select Worker"}
-            </div>
+            />
             {isOpen && (
               <div className="absolute top-full left-0 right-0 bg-white border rounded-sm mt-1 shadow-md z-10">
-                <input
-                  type="text"
-                  placeholder="Search worker..."
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="w-full p-2 border-b outline-none"
-                />
-                <ul className="max-h-40 overflow-y-auto">
-                  {filteredWorkers.map((worker, index) => (
-                    <li
-                      key={worker.id ?? index}
-                      onClick={() => {
-                        setSelectedWorker(worker.name);
-                        setIsOpen(false);
-                      }}
-                      className="p-2 hover:bg-gray-100 cursor-pointer"
-                    >
-                      {worker.name}
-                    </li>
-                  ))}
-                </ul>
+                {filteredWorkers.map((worker, index) => (
+                  <div key={index} onClick={() => selectWorker(worker?.work_type)} className='pl-1 hover:bg-blue-300 transition-all'>
+                    {worker.work_type}
+                  </div>
+                ))}
               </div>
             )}
           </div>
         </div>
 
         <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
-          {workers.length > 0 ? (
-            workers.map((worker) => (
+          {filteredWorkers.length > 0 ? (
+           filteredWorkers.map((worker, index) => (
               <Link
-                key={worker.id}
+                key={worker.id ?? index}
                 href={`/Home/worker/${worker.id}`}
                 className='block p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-200 cursor-pointer group'
               >
                 <div className='flex flex-col h-full'>
                   <div className='flex-1'>
                     <h3 className='font-semibold text-xl text-gray-900 mb-2 group-hover:text-blue-600 transition-colors'>{worker.name}</h3>
-                    {worker.skills && (
+                    {worker.work_type && (
                       <p className='text-sm text-gray-600 mb-2'>
-                        <span className='font-medium'>Skills:</span> {worker.skills}
+                        <span className='font-medium'>Skills:</span> {worker.work_type}
                       </p>
                     )}
                     {worker.experience && (

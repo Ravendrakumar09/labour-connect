@@ -3,6 +3,6 @@ import React from 'react'
 
 export default function page() {
   return (
-    <div>worker page</div>
+    <div className='h-screen'>worker page</div>
   )
 }

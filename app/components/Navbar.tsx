@@ -18,7 +18,7 @@ export default function Navbar() {
               <span className="text-2xl font-bold text-blue-600">LabourConnect</span>
             </Link>
           </div>
-          
+
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <Link href="/" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
@@ -37,7 +37,7 @@ export default function Navbar() {
                 Dashboard
               </Link>
             )}
-            
+
             {!loading && (
               <>
                 {user ? (
@@ -51,7 +51,7 @@ export default function Navbar() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </button>
-                    
+
                     {isProfileOpen && (
                       <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
                         <Link href="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
@@ -67,7 +67,7 @@ export default function Navbar() {
                     )}
                   </div>
                 ) : (
-                  <Link href="register" className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors">
+                  <Link href="/auth/register" className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors">
                     Register
                   </Link>
                 )}
@@ -112,7 +112,7 @@ export default function Navbar() {
                   Dashboard
                 </Link>
               )}
-              
+
               {!loading && (
                 <>
                   {user ? (
@@ -128,7 +128,7 @@ export default function Navbar() {
                       </button>
                     </>
                   ) : (
-                    <Link href="/[auth]/register" className="bg-blue-600 text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">
+                    <Link href="/auth/register" className="bg-blue-600 text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700">
                       Register
                     </Link>
                   )}
