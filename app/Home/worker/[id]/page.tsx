@@ -5,7 +5,7 @@ import { createClient } from '@/utils/supaabse/client';
 import Loader from '@/app/components/Loader';
 import Link from 'next/link';
 
-interface Worker {
+interface worker {
   id: string | number;
   name: string;
   phone?: string;
@@ -26,7 +26,7 @@ interface PageProps {
 }
 
 export default function WorkerDetailPage({ params }: PageProps) {
-  const [worker, setWorker] = useState<Worker | null>(null);
+  const [worker, setWorker] = useState<worker | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 

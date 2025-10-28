@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import Loader from '@/app/components/Loader'
 import Link from 'next/link'
 
-interface Worker {
+interface worker {
   id: string | number;
   name: string;
   phone?: string;
@@ -21,7 +21,7 @@ interface Worker {
 }
 
 export default function page() {
-  const [workers, setWorkers] = useState<Worker[]>([]);
+  const [workers, setWorkers] = useState<worker[]>([]);
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false)
   const [selectedWorker, setSelectedWorker] = useState('');
@@ -37,7 +37,7 @@ export default function page() {
         if (error) {
           console.log('workers error :', error)
         } else {
-          setWorkers(data as Worker[])
+          setWorkers(data as worker[])
         }
       } catch (error) {
         console.log('worker catch error', error)
@@ -49,7 +49,7 @@ export default function page() {
   }, []);
 
   // for filter workers list
-  const filteredWorkers = workers.filter((worker: Worker) =>
+  const filteredWorkers = workers.filter((worker: worker) =>
     worker.work_type?.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -89,7 +89,7 @@ export default function page() {
             {isOpen && (
               <div className="absolute top-full left-0 right-0 bg-white border rounded-sm mt-1 shadow-md z-10">
                 {filteredWorkers.map((worker, index) => (
-                  <div key={index} onClick={() => selectWorker(worker?.work_type)} className='pl-1 hover:bg-blue-300 transition-all'>
+                  <div key={index} onClick={() => selectWorker(worker?.work_type)} className='pl-1 hover:shadow-sm transition-all'>
                     {worker.work_type}
                   </div>
                 ))}
@@ -104,7 +104,7 @@ export default function page() {
               <Link
                 key={worker.id ?? index}
                 href={`/Home/worker/${worker.id}`}
-                className='block p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-200 cursor-pointer group'
+                className='block p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-200 group'
               >
                 <div className='flex flex-col h-full'>
                   <div className='flex-1'>
